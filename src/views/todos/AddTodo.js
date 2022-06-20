@@ -1,9 +1,12 @@
 import React from "react";
 
 class AddTodo extends React.Component {
-  state = {
-    title: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+    };
+  }
 
   handleOnChangeTitle = (event) => {
     this.setState({
@@ -33,9 +36,9 @@ class AddTodo extends React.Component {
           type="text"
           value={title}
           onChange={(event) => this.handleOnChangeTitle(event)}
-          onKeyDown={event => {
-            if(event.keyCode === 13) {
-                this.handleClickAddItem()
+          onKeyDown={(event) => {
+            if (event.keyCode === 13) {
+              this.handleClickAddItem();
             }
           }}
         />
@@ -43,7 +46,6 @@ class AddTodo extends React.Component {
           type="button"
           className="add"
           onClick={() => this.handleClickAddItem()}
-
         >
           Add
         </button>

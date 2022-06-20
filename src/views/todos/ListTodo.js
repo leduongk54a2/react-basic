@@ -67,9 +67,9 @@ class ListTodo extends React.Component {
 
   /**
    * handleOnchangeEditTodo
-   * @param {Object} event 
+   * @param {Object} event
    */
-   handleOnchangeEditTodo = (event) => {
+  handleOnchangeEditTodo = (event) => {
     let editTodoCopy = { ...this.state.editTodo };
     editTodoCopy.title = event.target.value;
     this.setState({
@@ -87,7 +87,7 @@ class ListTodo extends React.Component {
     this.setState({
       listTodos: todos,
     });
-    this.
+
     toast.success("success");
   };
 
@@ -96,47 +96,22 @@ class ListTodo extends React.Component {
     let isEmptyObj = Object.keys(editTodo).length === 0;
 
     return (
-      <div className="list-todo-container">
-        <AddTodo addNewTodo={this.addNewTodo} />
-        <div className="list-todo-content">
-          {listTodos &&
-            listTodos.map((item, index) => {
-              return (
-                <div className="todo-child" key={item.id}>
-                  <input
-                    type="checkbox"
-                    defaultChecked={item.completed}
-                    onChange={() => this.checkValue(item)}
-                  />
-                  {isEmptyObj ? (
-                    <>
-                      <span
-                        style={
-                          item.completed
-                            ? { textDecoration: "line-through" }
-                            : {}
-                        }
-                      >
-                        {index + 1} - {item.title}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      {editTodo.id === item.id ? (
-                        <span
-                          style={
-                            item.completed
-                              ? { textDecoration: "line-through" }
-                              : {}
-                          }
-                        >
-                          {index + 1} -{" "}
-                          <input
-                            value={editTodo.title}
-                            onChange={(ev) => this.handleOnchangeEditTodo(ev)}
-                          />
-                        </span>
-                      ) : (
+      <>
+        <p>Todo app with reactJS!</p>
+        <div className="list-todo-container">
+          <AddTodo addNewTodo={this.addNewTodo} />
+          <div className="list-todo-content">
+            {listTodos &&
+              listTodos.map((item, index) => {
+                return (
+                  <div className="todo-child" key={item.id}>
+                    <input
+                      type="checkbox"
+                      defaultChecked={item.completed}
+                      onChange={() => this.checkValue(item)}
+                    />
+                    {isEmptyObj ? (
+                      <>
                         <span
                           style={
                             item.completed
@@ -146,27 +121,55 @@ class ListTodo extends React.Component {
                         >
                           {index + 1} - {item.title}
                         </span>
-                      )}
-                    </>
-                  )}
+                      </>
+                    ) : (
+                      <>
+                        {editTodo.id === item.id ? (
+                          <span
+                            style={
+                              item.completed
+                                ? { textDecoration: "line-through" }
+                                : {}
+                            }
+                          >
+                            {index + 1} -{" "}
+                            <input
+                              value={editTodo.title}
+                              onChange={(ev) => this.handleOnchangeEditTodo(ev)}
+                            />
+                          </span>
+                        ) : (
+                          <span
+                            style={
+                              item.completed
+                                ? { textDecoration: "line-through" }
+                                : {}
+                            }
+                          >
+                            {index + 1} - {item.title}
+                          </span>
+                        )}
+                      </>
+                    )}
 
-                  <button
-                    className="edit"
-                    onClick={() => this.handleEditTodo(item)}
-                  >
-                    {!isEmptyObj && editTodo.id === item.id ? "Save" : "Edit"}
-                  </button>
-                  <button
-                    className="delete"
-                    onClick={() => this.handleDeleteTodo(item)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              );
-            })}
+                    <button
+                      className="edit"
+                      onClick={() => this.handleEditTodo(item)}
+                    >
+                      {!isEmptyObj && editTodo.id === item.id ? "Save" : "Edit"}
+                    </button>
+                    <button
+                      className="delete"
+                      onClick={() => this.handleDeleteTodo(item)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                );
+              })}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
