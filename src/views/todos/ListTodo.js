@@ -48,7 +48,7 @@ class ListTodo extends React.Component {
         listTodos: listTodosCopy,
         editTodo: {},
       });
-
+      toast.success("Edit success");
       return;
     }
 
@@ -57,11 +57,11 @@ class ListTodo extends React.Component {
     });
 
 
-    toast.success("Edit success");
+   
   };
 
   handleOnchangeEditTodo = (event) => {
-    console.log(event);
+
     let editTodoCopy = { ...this.state.editTodo };
     editTodoCopy.title = event.target.value;
     this.setState({
