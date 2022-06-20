@@ -1,17 +1,25 @@
 import React from "react";
-import "./ListTodo.scss";
 import { toast } from "react-toastify";
 import AddTodo from "./AddTodo.js";
+import "./ListTodo.scss";
+const API_URL = "https://jsonplaceholder.typicode.com/todos?_limit=5";
 class ListTodo extends React.Component {
-  state = {
-    listTodos: [
-      { id: "todo1", title: "doing homework" },
-      { id: "todo2", title: "making videos" },
-      { id: "todo3", title: "fixing bugs" },
-    ],
-    editTodo: {},
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      listTodos: [],
+      editTodo: {},
+    };
+  }
+  componentDidMount() {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          listTodos: json,
+        });
+      });
+  }
   addNewTodo = (todo) => {
     let currentListTodo = this.state.listTodos;
     currentListTodo.push(todo);
@@ -55,40 +63,73 @@ class ListTodo extends React.Component {
     this.setState({
       editTodo: todo,
     });
-
-
-   
   };
 
-  handleOnchangeEditTodo = (event) => {
-
+  /**
+   * handleOnchangeEditTodo
+   * @param {Object} event 
+   */
+   handleOnchangeEditTodo = (event) => {
     let editTodoCopy = { ...this.state.editTodo };
     editTodoCopy.title = event.target.value;
     this.setState({
       editTodo: editTodoCopy,
     });
   };
+
+  checkValue = (todo) => {
+    let todos = this.state.listTodos;
+    todos.forEach((element) => {
+      if (element.id == todo.id) {
+        element.completed = !element.completed;
+      }
+    });
+    this.setState({
+      listTodos: todos,
+    });
+    this.
+    toast.success("success");
+  };
+
   render() {
     let { listTodos, editTodo } = this.state;
     let isEmptyObj = Object.keys(editTodo).length === 0;
-    console.log(">>> check empty object: ", isEmptyObj);
+
     return (
       <div className="list-todo-container">
         <AddTodo addNewTodo={this.addNewTodo} />
         <div className="list-todo-content">
           {listTodos &&
-            listTodos.length > 0 &&
             listTodos.map((item, index) => {
               return (
                 <div className="todo-child" key={item.id}>
-                  {isEmptyObj === true ? (
-                    <span>
-                      {index + 1} - {item.title}
-                    </span>
+                  <input
+                    type="checkbox"
+                    defaultChecked={item.completed}
+                    onChange={() => this.checkValue(item)}
+                  />
+                  {isEmptyObj ? (
+                    <>
+                      <span
+                        style={
+                          item.completed
+                            ? { textDecoration: "line-through" }
+                            : {}
+                        }
+                      >
+                        {index + 1} - {item.title}
+                      </span>
+                    </>
                   ) : (
                     <>
                       {editTodo.id === item.id ? (
-                        <span>
+                        <span
+                          style={
+                            item.completed
+                              ? { textDecoration: "line-through" }
+                              : {}
+                          }
+                        >
                           {index + 1} -{" "}
                           <input
                             value={editTodo.title}
@@ -96,20 +137,24 @@ class ListTodo extends React.Component {
                           />
                         </span>
                       ) : (
-                        <span>
+                        <span
+                          style={
+                            item.completed
+                              ? { textDecoration: "line-through" }
+                              : {}
+                          }
+                        >
                           {index + 1} - {item.title}
                         </span>
                       )}
                     </>
                   )}
-                  {/* <input value={item.title} /> */}
+
                   <button
                     className="edit"
                     onClick={() => this.handleEditTodo(item)}
                   >
-                    {isEmptyObj === false && editTodo.id === item.id
-                      ? "Save"
-                      : "Edit"}
+                    {!isEmptyObj && editTodo.id === item.id ? "Save" : "Edit"}
                   </button>
                   <button
                     className="delete"
