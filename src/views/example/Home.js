@@ -1,7 +1,8 @@
 import React from "react";
 import withRouter from "../../hoc/withRouter";
+import Color from "../../hoc/color";
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 class Home extends React.Component {
     componentDidMount() {   
         setTimeout(() => {
@@ -9,7 +10,7 @@ class Home extends React.Component {
         },3000)
     }
     render() {
-        
+
         return (
             <div>
                 hello my react-basic
@@ -18,4 +19,4 @@ class Home extends React.Component {
     }
 }
 
-export default withRouter(Home)
+export default Color(withRouter(Home))

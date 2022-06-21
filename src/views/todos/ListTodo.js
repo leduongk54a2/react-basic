@@ -2,6 +2,8 @@ import React from "react";
 import { toast } from "react-toastify";
 import AddTodo from "./AddTodo.js";
 import "./ListTodo.scss";
+
+import Color from "../../hoc/color.js";
 const API_URL = "https://jsonplaceholder.typicode.com/todos?_limit=5";
 class ListTodo extends React.Component {
   constructor(props) {
@@ -174,4 +176,4 @@ class ListTodo extends React.Component {
   }
 }
 
-export default ListTodo;
+export default Color(ListTodo);
