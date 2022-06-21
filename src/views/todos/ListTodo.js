@@ -80,7 +80,7 @@ class ListTodo extends React.Component {
   checkValue = (todo) => {
     let todos = this.state.listTodos;
     todos.forEach((element) => {
-      if (element.id == todo.id) {
+      if (element.id === todo.id) {
         element.completed = !element.completed;
       }
     });
