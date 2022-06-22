@@ -38,7 +38,7 @@ class DetailUser extends React.Component {
             </div>
             <div>Email: {user.email}</div>
             <div>
-              <img src={user.avatar}></img>
+              <img src={user.avatar} alt=""></img>
             </div>
             <div>
                 <button type="button" onClick={()=> this.handleBackButton()}>Back</button>
