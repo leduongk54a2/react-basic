@@ -5,10 +5,12 @@ import "./views/todos/ListTodo";
 // import MyComponent from './views/example/MyComponents'
 import ListTodo from "./views/todos/ListTodo";
 import Nav from "./views/nav/Nav.js";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyComponent from "./views/example/MyComponents";
 import Home from "./views/example/Home.js";
+import ListUser from "./views/users/ListUser";
+import DetailUser from "./views/users/DetailUser";
 const App = () => {
   return (
     <BrowserRouter>
@@ -20,6 +22,8 @@ const App = () => {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/todo" element={<ListTodo />} />
             <Route exact path="/about" element={<MyComponent />} />
+            <Route exact path="/users" element={<ListUser />} />
+            <Route exact path="/users/:id" element={<DetailUser />} />
           </Routes>
           {/* <MyComponent /> */}
         </header>
