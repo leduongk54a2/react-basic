@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
+
 import "./views/todos/ListTodo";
 // import MyComponent from './views/example/MyComponents'
 import ListTodo from "./views/todos/ListTodo";
@@ -11,6 +12,8 @@ import MyComponent from "./views/example/MyComponents";
 import Home from "./views/example/Home.js";
 import ListUser from "./views/users/ListUser";
 import DetailUser from "./views/users/DetailUser";
+import Page from "./Com/Page";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,8 +27,8 @@ const App = () => {
             <Route exact path="/about" element={<MyComponent />} />
             <Route exact path="/users" element={<ListUser />} />
             <Route exact path="/users/:id" element={<DetailUser />} />
+            <Route exact path="/antd" element={<Page />} />
           </Routes>
-          {/* <MyComponent /> */}
         </header>
         <ToastContainer
           position="top-right"
@@ -38,6 +41,7 @@ const App = () => {
           draggable
           pauseOnHover
         />
+      
       </div>
     </BrowserRouter>
   );
